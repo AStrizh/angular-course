@@ -1,9 +1,15 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Course} from '../model/course';
+import {NgClass, NgStyle} from '@angular/common';
+import {CdkMenu} from '@angular/cdk/menu';
 
 @Component({
   selector: 'course-card',
-  imports: [],
+  imports: [
+    NgClass,
+    NgStyle,
+    CdkMenu
+  ],
   templateUrl: './course-card.component.html',
   styleUrl: './course-card.component.css'
 })
@@ -26,4 +32,16 @@ export class CourseCardComponent {
       this.courseSelected.emit(this.course);
   }
 
+  cardClasses(){
+    return {
+      'beginner': this.course.category == 'BEGINNER',
+      'intermediate': this.course.category == 'INTERMEDIATE',
+      'advanced': this.course.category == 'ADVANCED',
+
+    }
+  }
+
+  cardStyles() {
+    return {'text-decoration': 'underline'};
+  }
 }
